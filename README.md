@@ -12,12 +12,33 @@ We are using _Electricity Load Forecasting_ dataset from kaggle. More about orig
 
 The dataset was downloaded from [Kaggle](https://www.kaggle.com/datasets/saurabhshahane/electricity-load-forecasting/data) and contains the following files in the `data/raw/` directory:
 
-1. `continuous-dataset.csv`: A CSV file containing all records in a single continuous dataset with all variables.
-2. `train_dataframes.xlsx`: An Excel file containing suggested regressors and training datasets.
-3. `test_dataframes.xlsx`: An Excel file containing suggested regressors and testing datasets.
-4. `weekly-pre-dispatch-forecast.csv`: A CSV file containing the load forecast from weekly pre-dispatch reports.
+1. `continuous dataset.csv`:
 
-These files provide a comprehensive set of data for training and evaluating our electricity load forecasting model.
+   - 48,048 entries
+   - 17 columns including datetime, national demand, weather variables for three locations (toc, san, dav), and calendar information
+   - Key features: datetime, nat*demand, T2M*_, QV2M\__, TQL*\*, W2M*\*, Holiday_ID, holiday, school
+
+2. `weekly pre-dispatch forecast.csv`:
+
+   - 40,152 entries
+   - 2 columns: datetime and load_forecast
+
+3. `train_dataframes.xlsx`:
+
+   - 14 sheets with varying numbers of entries:
+   - Each sheet contains 12 columns including datetime, historical demand (week_X-2, week_X-3, week_X-4), moving average, calendar features, temperature, and actual demand
+   - The increasing number of entries per sheet suggests that each sheet covers a progressively larger time period
+
+4. `test_dataframes.xlsx`:
+   - Structure similar to train_dataframes.xlsx
+
+Key Points:
+
+- The continuous dataset covers the longest period
+- Train data is split into multiple sheets, each covering a different time period
+- All datasets include datetime information, allowing for time series analysis
+- Weather variables are available for multiple locations
+- Calendar features (holiday, school, dayOfWeek, weekend) are included
 
 ## Project Structure
 
@@ -31,7 +52,7 @@ electricity-load-timeseries-forecast/
 │   │   └── weekly pre-dispatch forecast.csv
 │   └── processed/
 ├── notebooks/
-│   └── exploratory_data_analysis.ipynb
+│   └── eda.ipynb
 ├── src/
 │   ├── data_processing.py
 │   ├── feature_engineering.py
