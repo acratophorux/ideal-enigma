@@ -40,6 +40,34 @@ Key Points:
 - Weather variables are available for multiple locations
 - Calendar features (holiday, school, dayOfWeek, weekend) are included
 
+## Project Progress
+
+### Data Preprocessing
+
+We have completed the initial data preprocessing stage:
+
+1. **Data Loading**: All datasets (continuous-dataset, weekly-pre-dispatch-forecast, train and test dataframes) have been loaded from the `data/raw` folder.
+
+2. **Feature Engineering**:
+
+   - Added time-based features: hour, day_of_week, month, year, and is_weekend
+   - Created lag features for demand (24, 48, and 168 hours)
+   - Calculated rolling mean features for demand (24 and 168 hour windows)
+
+3. **Data Normalization**:
+
+   - Normalized weather columns in the continuous dataset
+   - Normalized numerical columns in train and test dataframes
+
+4. **Data Processing**:
+
+   - Processed continuous dataset, forecast data, and individual sheets of train and test dataframes
+
+5. **Data Storage**:
+   - Saved all processed datasets in the `data/processed` directory for further analysis and modeling
+
+Next steps will involve exploratory data analysis, feature selection, and model development.
+
 ## Project Structure
 
 ```
