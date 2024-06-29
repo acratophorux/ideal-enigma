@@ -12,13 +12,13 @@ We are using _Electricity Load Forecasting_ dataset from kaggle. More about orig
 
 The dataset was downloaded from [Kaggle](https://www.kaggle.com/datasets/saurabhshahane/electricity-load-forecasting/data) and contains the following files in the `data/raw/` directory:
 
-1. `continuous dataset.csv`:
+1. `continuous-dataset.csv`:
 
    - 48,048 entries
    - 17 columns including datetime, national demand, weather variables for three locations (toc, san, dav), and calendar information
-   - Key features: datetime, nat*demand, T2M*_, QV2M\__, TQL*\*, W2M*\*, Holiday_ID, holiday, school
+   - Key features: datetime, nat*demand, T2M*\_, QV2M\_\_, TQL*\*, W2M*\*, Holiday_ID, holiday, school
 
-2. `weekly pre-dispatch forecast.csv`:
+2. `weekly-pre-dispatch-forecast.csv`:
 
    - 40,152 entries
    - 2 columns: datetime and load_forecast
