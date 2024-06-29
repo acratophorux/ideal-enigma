@@ -1,8 +1,8 @@
-# Electricity Production Time Series Forecasting
+# Electricity Load Forecasting
 
 ## Project Overview
 
-This project is focused on short-term electricity production forecasting using _Electricity Load Forecasting_ dataset from Kaggle. The dataset can be found [here](https://www.kaggle.com/datasets/shenba/time-series-datasets/data).
+This project is focused on short-term electricity load forecasting using _Electricity Load Forecasting_ dataset from Kaggle. The dataset can be found [here](https://www.kaggle.com/datasets/shenba/time-series-datasets/data).
 
 The goal is to develop and evaluate a machine learning forecasting model and compare its results with official forecasts from weekly pre-dispatch reports.
 
