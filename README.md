@@ -32,7 +32,7 @@ The dataset was downloaded from [Kaggle](https://www.kaggle.com/datasets/saurabh
 4. `test_dataframes.xlsx`:
    - Structure similar to train_dataframes.xlsx
 
-Key Points:
+Key Insights:
 
 - The continuous dataset covers the longest period
 - Train data is split into multiple sheets, each covering a different time period
@@ -44,7 +44,7 @@ Key Points:
 
 ### Data Preprocessing
 
-We have completed the initial data preprocessing stage:
+We completed the initial data preprocessing stage:
 
 1. **Data Loading**: All datasets (continuous-dataset, weekly-pre-dispatch-forecast, train and test dataframes) have been loaded from the `data/raw` folder.
 
@@ -66,7 +66,50 @@ We have completed the initial data preprocessing stage:
 5. **Data Storage**:
    - Saved all processed datasets in the `data/processed` directory for further analysis and modeling
 
-Next steps will involve exploratory data analysis, feature selection, and model development.
+### Exploratory Data Analysis (EDA)
+
+After preprocessing the data, we performed exploratory data analysis to better understand the patterns and relationships in our dataset. The EDA process included:
+
+1. Visualizing national demand over time
+2. Analyzing the distribution of national demand
+3. Examining average demand by hour of day
+4. Creating a correlation heatmap of numerical features
+
+Key findings from the EDA:
+
+1. Correlation Analysis:
+
+   - Strong positive correlations between temperature (T2M) variables across different locations.
+   - Moderate positive correlation between national demand and temperature variables.
+   - Negative correlation between national demand and weekends, indicating lower demand on weekends.
+
+2. Distribution of National Electricity Demand:
+
+   - Slightly right-skewed distribution.
+   - Majority of demand values fall between 750 and 1500 units.
+   - Presence of outliers on the lower end, potentially corresponding to anomalies or special events.
+
+3. National Electricity Demand Over Time:
+
+   - Clear cyclical patterns in demand, likely corresponding to daily and weekly cycles.
+   - Relatively stable overall trend over the years.
+   - Regular drops in demand, possibly corresponding to holidays or weekends.
+   - Few significant anomalies, including a notable drop in early 2019.
+
+4. Average Demand by Hour:
+   - Lowest demand during early morning hours (2-5 AM).
+   - Two peak periods: around noon and in the evening (6-8 PM).
+   - Evening peak slightly higher than the midday peak.
+   - Sharp rise in demand from about 6 AM, corresponding to the start of the typical workday.
+
+Insights for Modeling:
+
+1. Temperature and time-based features (hour, day of week, is_weekend) are likely to be important predictors.
+2. Consider creating features that capture daily and weekly cycles in demand.
+3. Anomalies in the data may need to be addressed through data cleaning or as a separate model component.
+4. The model should be able to capture the bimodal daily pattern of demand.
+
+The results of these analyses can be found in the `figures` directory.
 
 ## Project Structure
 
@@ -81,6 +124,11 @@ electricity-load-timeseries-forecast/
 │   └── processed/
 ├── notebooks/
 │   └── eda.ipynb
+├── figures/
+│   ├── correlation_heatmap.png
+│   ├── demand_distribution.png
+│   ├── demand_over_time.png
+│   └── hourly_demand.png
 ├── src/
 │   ├── data_processing.py
 │   ├── feature_engineering.py
