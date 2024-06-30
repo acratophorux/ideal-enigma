@@ -133,6 +133,63 @@ Following the insights gained from EDA, we performed additional feature engineer
 
 All engineered features were normalized using StandardScaler to ensure consistent scale across variables. The final engineered dataset was saved as 'engineered_features.csv' in the 'data/engineered/' directory.
 
+## Modeling
+
+After preprocessing the data and performing feature engineering, we implemented two initial models for electricity load forecasting:
+
+1. Autoregressive Model
+2. XGBoost Model
+
+### Model Performance
+
+We evaluated both models using Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and Mean Absolute Error (MAE). Here are the initial results:
+
+1. Autoregressive Model:
+
+   - MSE: 0.9525
+   - RMSE: 0.9760
+   - MAE: 0.7893
+
+2. XGBoost Model:
+   - MSE: 0.1128
+   - RMSE: 0.3358
+   - MAE: 0.2302
+
+The XGBoost model significantly outperformed the Autoregressive model in all metrics, showing promise for our forecasting task.
+
+### Feature Importance
+
+We analyzed feature importance using the XGBoost model. Here are the top 10 most important features:
+
+1. nat_demand_lag_168 (61.19%)
+2. nat_demand_lag_24 (10.72%)
+3. Holiday_ID (8.32%)
+4. hour_cos (3.54%)
+5. day_of_week (2.40%)
+6. nat_demand_rolling_mean_24 (2.32%)
+7. hour_sin (1.93%)
+8. hour (1.74%)
+9. T2M_toc (1.45%)
+10. T2M_dav (0.70%)
+
+### Key Insights
+
+1. The 168-hour (1 week) lag of national demand is by far the most important feature, suggesting strong weekly patterns in electricity demand.
+2. The 24-hour lag is the second most important, indicating daily patterns as well.
+3. Holiday information plays a significant role in predicting demand.
+4. Cyclical features (hour_cos, hour_sin) show moderate importance, further confirming the relevance of time-based patterns.
+5. Temperature features appear in the top 10, but with relatively low importance compared to time-based features.
+
+## Next Steps
+
+Based on these initial results, our next steps will include:
+
+1. Refining the XGBoost model through hyperparameter tuning
+2. Experimenting with feature selection based on importance
+3. Implementing more advanced time series models (e.g., SARIMA, Prophet)
+4. Conducting a more detailed error analysis
+5. Comparing our model performance with the official forecasts from weekly pre-dispatch reports
+
 ## Project Structure
 
 ```
