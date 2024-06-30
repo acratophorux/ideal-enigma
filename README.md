@@ -16,7 +16,7 @@ The dataset was downloaded from [Kaggle](https://www.kaggle.com/datasets/saurabh
 
    - 48,048 entries
    - 17 columns including datetime, national demand, weather variables for three locations (toc, san, dav), and calendar information
-   - Key features: datetime, nat*demand, T2M*\_, QV2M\_\_, TQL*\*, W2M*\*, Holiday_ID, holiday, school
+   - Key features: datetime, nat_demand, T2M*\*, QV2M*\*, TQL*\*, W2M*\*, Holiday_ID, holiday, school
 
 2. `weekly-pre-dispatch-forecast.csv`:
 
@@ -87,20 +87,17 @@ Key findings from the EDA:
 
    - Slightly right-skewed distribution.
    - Majority of demand values fall between 750 and 1500 units.
-   - Presence of outliers on the lower end, potentially corresponding to anomalies or special events.
+   - Presence of outliers on the lower end, potentially corresponding to anomalies.
 
 3. National Electricity Demand Over Time:
 
-   - Clear cyclical patterns in demand, likely corresponding to daily and weekly cycles.
    - Relatively stable overall trend over the years.
-   - Regular drops in demand, possibly corresponding to holidays or weekends.
    - Few significant anomalies, including a notable drop in early 2019.
 
 4. Average Demand by Hour:
    - Lowest demand during early morning hours (2-5 AM).
-   - Two peak periods: around noon and in the evening (6-8 PM).
-   - Evening peak slightly higher than the midday peak.
-   - Sharp rise in demand from about 6 AM, corresponding to the start of the typical workday.
+   - Two peak periods: around noon and in the evening.
+   - Evening peak slightly lower than the midday peak.
 
 Insights for Modeling:
 
@@ -110,6 +107,31 @@ Insights for Modeling:
 4. The model should be able to capture the bimodal daily pattern of demand.
 
 The results of these analyses can be found in the `figures` directory.
+
+### Feature Engineering
+
+Following the insights gained from EDA, we performed additional feature engineering to enhance our dataset for modeling:
+
+1. Cyclical Features:
+
+   - Created sine and cosine features for hour and month to capture cyclical patterns.
+
+2. Lag Features:
+
+   - Extended lag features for national demand to capture longer-term dependencies (24, 48, and 168 hours).
+
+3. Rolling Window Features:
+
+   - Implemented rolling mean and standard deviation features for national demand with windows of 24 and 168 hours.
+
+4. Interaction Features:
+
+   - Created temperature-humidity interaction features for each city to capture combined effects.
+
+5. Holiday Encoding:
+   - Converted the 'holiday' feature to a binary indicator.
+
+All engineered features were normalized using StandardScaler to ensure consistent scale across variables. The final engineered dataset was saved as 'engineered_features.csv' in the 'data/engineered/' directory.
 
 ## Project Structure
 
@@ -121,7 +143,9 @@ electricity-load-timeseries-forecast/
 │   │   ├── train_dataframes.xlsx
 │   │   ├── test_dataframes.xlsx
 │   │   └── weekly pre-dispatch forecast.csv
-│   └── processed/
+│   ├── processed/
+│   └── engineered/
+│       └── engineered_features.csv
 ├── notebooks/
 │   └── eda.ipynb
 ├── figures/
@@ -132,11 +156,9 @@ electricity-load-timeseries-forecast/
 ├── src/
 │   ├── data_processing.py
 │   ├── feature_engineering.py
-│   ├── model.py
-│   └── evaluation.py
-├── tests/
+│   ├── eda.py
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
-└── main.py
+
 ```
